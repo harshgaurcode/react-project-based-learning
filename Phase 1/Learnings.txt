@@ -1,0 +1,63 @@
+useState in React 
+    const [count, setCount] = useState(0);
+
+    React creates a "state box" for count with value 0.
+    When you call setCount(1), React replaces the value and re-renders the component.
+
+    import { useState } from 'react';
+
+function ToggleDiv() {
+  const [shows, showDiv] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => showDiv(!shows)}>
+        {shows ? "Hide Div" : "Show Div"}
+      </button>
+
+      {shows && (
+        <div>
+          <p>This is a div that can be shown or hidden.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+const [shows, showDiv] = useState(false);
+shows → holds the current value of the state (in this case, a boolean – true or false)
+
+showDiv → is the function that updates shows
+
+useState(false) → sets the initial value to false
+
+You're not just changing a variable — you're telling React:
+
+"Hey! Update this value and re-render the UI accordingly."
+
+That’s the reactive magic of useState.
+
+ Behind the scenes
+React uses something called a hook queue, so every useState call has to happen in the same order on every render. That's why you can’t put useState inside if conditions or loops.
+
+
+
+Real-World Use Cases
+Toggling a modal: const [isOpen, setIsOpen] = useState(false)
+
+Counting clicks: const [count, setCount] = useState(0)
+
+Handling form input: const [name, setName] = useState("")
+
+Managing tab state, selected item, dark mode toggle, etc.
+
+Every time you call setState, React:
+
+Updates the internal value of that state
+
+Re-renders the component
+
+Applies the new state in the next render cycle
+
+It’s reactive — meaning UI auto-updates when the state changes.
