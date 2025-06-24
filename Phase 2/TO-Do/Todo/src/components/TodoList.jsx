@@ -1,13 +1,31 @@
-function TodoList({ todos, onToggle, onDelete }) {
+import { useState } from "react";
+import TodoList from "./components/TodoList";
+
+function App() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (text) => {
+    const newTodo = { id: Date.now(), text, completed: false };
+    setTodos([...todos, newTodo]);
+  };
+
+  const toggleTodo = (id) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
+  };
+
+  const deleteTodo = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
+
   return (
-    <ul className="todo-list">
-      {todos.map((todo) => (
-        <li key={todo.id} className={todo.completed ? "completed" : ""}>
-          <span onClick={() => onToggle(todo.id)}>{todo.text}</span>
-          <button onClick={() => onDelete(todo.id)}>Delete</button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+    </div>
   );
 }
-export default TodoList;
+
+export default App;

@@ -1,5 +1,7 @@
+import React, { useState } from "react";
+
 function TodoInput({ onAddTodo }) {
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
     setInputValue(event.target.value);

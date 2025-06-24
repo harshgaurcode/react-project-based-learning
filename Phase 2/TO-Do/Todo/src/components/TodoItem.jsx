@@ -1,12 +1,22 @@
-function TodoItem({ todo, onToggle, onDelete }) {
+import TodoItem from "./TodoItem";
+import TodoInput from "./TodoInput";
+
+function TodoList({ todos, onToggle, onDelete }) {
   return (
-    <li className={todo.completed ? "completed" : ""}>
-      <span onClick={() => onToggle(todo.id)}>{todo.text}</span>
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
-    </li>
+    <div>
+      <TodoInput onAddTodo={onToggle} /> {/* Passes addTodo function */}
+      <ul>
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onToggle={onToggle}
+            onDelete={onDelete}
+          />
+        ))}
+      </ul>
+    </div>
   );
 }
 
-export default TodoItem;
-// This component represents a single todo item in the list.
-// It displays the todo text and provides options to toggle its completion status or delete it.
+export default TodoList;
